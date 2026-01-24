@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="دورة تعليمية شاملة لتعلم الذكاء الاصطناعي باستخدام Kaggle و Python Pandas">
+    <title>دورة الذكاء الاصطناعي - Kaggle & Python Pandas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="site-header">
+        <div class="header-content">
+            <h1>دورة الذكاء الاصطناعي</h1>
+            <p class="subtitle">تعلم استخدام Kaggle و Python Pandas خطوة بخطوة</p>
+        </div>
+    </header>
+
+    <!-- Progress Navigation -->
+    <nav class="progress-nav" id="progressNav">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <ul class="nav-steps">
+            <li><a href="#intro" data-step="1">المقدمة</a></li>
+            <li><a href="#setup" data-step="2">الإعداد</a></li>
+            <li><a href="#dataset" data-step="3">البيانات</a></li>
+            <li><a href="#functions" data-step="4">الدوال</a></li>
+            <li><a href="#validation" data-step="5">التحقق</a></li>
+            <li><a href="#processing" data-step="6">المعالجة</a></li>
+            <li><a href="#analysis" data-step="7">التحليل</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Tutorial Content -->
+    <main class="tutorial-container">
+
+        <!-- Section 1: Introduction -->
+        <section class="tutorial-section" id="intro">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>المقدمة إلى Kaggle</h2>
+            </div>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>سنبدأ الفصل الثاني بتعلم استخدام برنامج Kaggle للذكاء الاصطناعي</p>
+                    <p>هذا تطبيق kaggle - نختار notebook</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_1@26-11-2025_07-29-03.jpg" alt="واجهة Kaggle" loading="lazy">
+                    <figcaption>اختيار Notebook في Kaggle</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>الخطوة التالية هي إعادة تسمية الـ notebook لاسم جديد مرتبط بنموذج الذكاء الاصطناعي المراد تدريبه
+                    </p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_2@26-11-2025_07-29-03.jpg" alt="إعادة تسمية Notebook" loading="lazy">
+                    <figcaption>إعادة تسمية الـ Notebook</figcaption>
+                </figure>
+            </article>
+        </section>
+
+        <!-- Section 2: Dataset Setup -->
+        <section class="tutorial-section" id="setup">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>إعداد مجموعة البيانات</h2>
+            </div>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>الخطوة التالية هي اختيار dataset التي سوف ندرب النموذج عليها من خلال الضغط على
+                        <code>add input+</code>
+                    </p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_3@26-11-2025_07-29-03.jpg" alt="إضافة Dataset" loading="lazy">
+                    <figcaption>إضافة مجموعة البيانات</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>الآن في الشاشة التالية نختار فلترة dataset</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_4@26-11-2025_07-29-03.jpg" alt="فلترة Dataset" loading="lazy">
+                    <figcaption>فلترة مجموعة البيانات</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>في شريط البحث نكتب كلمة <strong>iris</strong> (وهي مجموعة بيانات عن زهرة السوسنة) ونلاحظ أن
+                        الفلترة هي لـ dataset حسب ما اخترناها في الخطوة السابقة. نقوم الآن بالضغط على إشارة
+                        <code>+</code> لإضافة المجموعة إلى notebook
+                    </p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_5@26-11-2025_07-29-03.jpg" alt="البحث عن Iris Dataset" loading="lazy">
+                    <figcaption>البحث عن مجموعة Iris</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>بعد اختيار dataset يتغير لون إشارة <code>+</code> إلى اللون الأسود، بعدها نقوم بالضغط على إشارة
+                        <code>x</code> للخروج من النافذة
+                    </p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_6@26-11-2025_07-29-03.jpg" alt="تأكيد الاختيار" loading="lazy">
+                    <figcaption>تأكيد اختيار المجموعة</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>تظهر الآن مجموعة البيانات التي اخترناها</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_7@26-11-2025_07-29-03.jpg" alt="عرض Dataset" loading="lazy">
+                    <figcaption>مجموعة البيانات المختارة</figcaption>
+                </figure>
+            </article>
+        </section>
+
+        <!-- Section 3: Reading Data -->
+        <section class="tutorial-section" id="dataset">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2>قراءة البيانات</h2>
+            </div>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>الخطوة التالية هي تشغيل الكود الظاهر في notebook وذلك بالضغط على زر التشغيل</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_8@26-11-2025_07-29-03.jpg" alt="تشغيل الكود" loading="lazy">
+                    <figcaption>تشغيل الكود الأول</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>سوف يقوم البرنامج بإظهار رابط مجموعة البيانات</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_9@26-11-2025_07-29-03.jpg" alt="رابط البيانات" loading="lazy">
+                    <figcaption>رابط مجموعة البيانات</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>الآن سوف نقوم بإضافة سطر برمجي جديد من خلال الضغط على <code>code+</code></p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_10@26-11-2025_07-29-03.jpg" alt="إضافة كود" loading="lazy">
+                    <figcaption>إضافة سطر برمجي جديد</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>الآن سوف نكتب الأمر البرمجي التالي:</p>
+                    <pre class="code-block"><code>df = pd.read_csv('path/to/iris.csv')</code></pre>
+                    <div class="info-box">
+                        <strong>ملاحظة:</strong> <code>df</code> هو مكان في الذاكرة نقوم بتخزين قاعدة البيانات (csv) على
+                        صورة data frame لأن لغة البرمجة بايثون لا تتعامل مع ملف csv مباشرة
+                    </div>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_11@26-11-2025_07-29-03.jpg" alt="كتابة pd.read_csv" loading="lazy">
+                    <figcaption>كتابة أمر قراءة البيانات</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>في الأمر السابق تم استدعاء دالة <code>read_csv</code> من مكتبة <code>pandas</code> والتي تم
+                        تسميتها <code>pd</code> لسهولة التعامل معها</p>
+                    <p>الآن سوف ننسخ (copy) مسار مجموعة البيانات (dataset) ونضعه بين الأقواس مع وضع علامة الاقتباس
+                        <code>' '</code>
+                    </p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_12@26-11-2025_07-29-03.jpg" alt="نسخ المسار" loading="lazy">
+                    <figcaption>نسخ مسار البيانات</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>الآن نضغط على زر التشغيل</p>
+                    <div class="info-box">
+                        <strong>ملاحظة:</strong> هنا لن نحصل على نتائج، فقط يقوم البرنامج بتخزين مجموعة البيانات في الـ
+                        Data Frame
+                    </div>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_13@26-11-2025_07-29-03.jpg" alt="تشغيل read_csv" loading="lazy">
+                    <figcaption>تشغيل أمر القراءة</figcaption>
+                </figure>
+            </article>
+        </section>
+
+        <!-- Section 4: Data Functions -->
+        <section class="tutorial-section" id="functions">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>دوال التحقق من البيانات</h2>
+            </div>
+
+            <p class="section-intro">الآن سوف نقوم بكتابة بعض الدوال التي من خلالها نتأكد ونتحقق من جودة البيانات</p>
+
+            <!-- Function 1: df.shape -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة الأولى: <code>df.shape</code></h3>
+                    <pre class="code-block"><code>df.shape</code></pre>
+                    <p>نقوم بإضافة <code>code+</code> جديد ونكتب <code>df.shape</code></p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_14@26-11-2025_07-29-03.jpg" alt="df.shape" loading="lazy">
+                    <figcaption>كتابة df.shape</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>نقوم بالضغط على زر التشغيل فتظهر <code>(150, 5)</code> وهي حجم مجموعة البيانات:</p>
+                    <ul class="result-list">
+                        <li><strong>150</strong> - عدد السجلات (الصفوف أو الكائنات أو records أو instances)</li>
+                        <li><strong>5</strong> - عدد الأعمدة (features أو attributes)</li>
+                    </ul>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_15@26-11-2025_07-29-03.jpg" alt="نتيجة df.shape" loading="lazy">
+                    <figcaption>نتيجة df.shape</figcaption>
+                </figure>
+            </article>
+
+            <!-- Function 2: df.info() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة الثانية: <code>df.info()</code></h3>
+                    <pre class="code-block"><code>df.info()</code></pre>
+                    <p>تقوم بفحص كافة البيانات لمعرفة الخلايا الفارغة ونوع البيانات في الخلايا (cell)</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_16@26-11-2025_07-29-03.jpg" alt="df.info()" loading="lazy">
+                    <figcaption>نتيجة df.info()</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>النتائج التي حصلنا عليها:</p>
+                    <ul class="result-list">
+                        <li><code>non-null</code> - تعني أنه لا يوجد خلايا فارغة</li>
+                        <li><code>float64</code> - تعني أن الخلايا تحتوي على أعداد عشرية</li>
+                        <li><code>object</code> - تعني أن الخلايا تحتوي على نص</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Function 3: df.head() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة الثالثة: <code>df.head()</code></h3>
+                    <pre class="code-block"><code>df.head()
+# أو لعرض 10 سجلات
+df.head(10)</code></pre>
+                    <p>تقوم بعرض أول 5 سجلات من بداية مجموعة البيانات. الترقيم للسجلات أو الأعمدة يبدأ من الرقم صفر.</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_17@26-11-2025_07-29-03.jpg" alt="df.head()" loading="lazy">
+                    <figcaption>نتيجة df.head()</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>كما يمكننا تحديد عدد السجلات التي نريد عرضها (مثال: عرض 10 سجلات)</p>
+                    <div class="info-box">
+                        <strong>الفائدة:</strong> نستخدم دالة <code>df.head()</code> للتأكد من أن القيم متناسقة وليس
+                        هناك أي قيم شاذة
+                    </div>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_18@26-11-2025_07-29-03.jpg" alt="df.head(10)" loading="lazy">
+                    <figcaption>عرض 10 سجلات</figcaption>
+                </figure>
+            </article>
+
+            <!-- Function 4: df.tail() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة الرابعة: <code>df.tail()</code></h3>
+                    <pre class="code-block"><code>df.tail()</code></pre>
+                    <p>تستخدم لعرض السجلات لكن من آخر سجل في مجموعة البيانات. ويمكن أيضاً تحديد عدد السجلات المراد عرضها
+                        مثل head</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_19@26-11-2025_07-29-03.jpg" alt="df.tail()" loading="lazy">
+                    <figcaption>نتيجة df.tail()</figcaption>
+                </figure>
+            </article>
+        </section>
+
+        <!-- Section 5: Data Validation -->
+        <section class="tutorial-section" id="validation">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2>التحقق من صحة البيانات</h2>
+            </div>
+
+            <p class="section-intro">اليوم تم استكمال الدوال (function) التي نطبقها على مجموعة البيانات (dataset) للتأكد
+                من صحتها وجودتها</p>
+
+            <figure class="step-image standalone">
+                <img src="photos/photo_20@26-11-2025_07-29-03.jpg" alt="جدول الدوال" loading="lazy">
+                <figcaption>جدول الدوال الأساسية</figcaption>
+            </figure>
+
+            <!-- Function 5: df.value_counts() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة الخامسة: <code>df.value_counts()</code></h3>
+                    <pre class="code-block"><code>df.value_counts()
+# أو لعمود معين
+df.value_counts('species')</code></pre>
+                    <p>تقوم هذه الدالة بحساب التكرار بناءً على السجلات في مجموعة البيانات</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_21@26-11-2025_07-29-03.jpg" alt="value_counts" loading="lazy">
+                    <figcaption>نتيجة value_counts</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>نلاحظ وجود تكرار لسجل 3 مرات وسجل آخر مرتان وباقي السجلات تكررت مرة واحدة فقط</p>
+                    <p>في نفس الدالة يمكننا معرفة التكرار ضمن عمود وذلك بكتابة اسم العمود بين إشارات الاقتباس المفردة
+                    </p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_22@26-11-2025_07-29-03.jpg" alt="value_counts لعمود" loading="lazy">
+                    <figcaption>التكرار ضمن عمود معين</figcaption>
+                </figure>
+            </article>
+
+            <!-- Function 6: df.isnull() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة السادسة: <code>df.isnull()</code></h3>
+                    <pre class="code-block"><code>df.isnull()
+# لمعرفة عدد الفراغات
+df.isnull().sum()
+# لمعرفة وجود فراغات
+df.isnull().any()</code></pre>
+                    <p>تستخدم لمعرفة الخلايا الفارغة في مجموعة البيانات</p>
+                    <ul class="result-list">
+                        <li><code>False</code> - لا يوجد فراغ</li>
+                        <li><code>True</code> - يوجد فراغ</li>
+                    </ul>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_23@26-11-2025_07-29-03.jpg" alt="df.isnull()" loading="lazy">
+                    <figcaption>نتيجة df.isnull()</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>يمكن الحصول على عدد الفراغات في كل عمود عن طريق إضافة <code>.sum()</code></p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_24@26-11-2025_07-29-03.jpg" alt="isnull().sum()" loading="lazy">
+                    <figcaption>عدد الفراغات في كل عمود</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>كما يمكننا معرفة إذا ما كان هناك فراغات في الأعمدة دون تحديد عددها وذلك بإضافة
+                        <code>.any()</code>
+                    </p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_25@26-11-2025_07-29-03.jpg" alt="isnull().any()" loading="lazy">
+                    <figcaption>التحقق من وجود فراغات</figcaption>
+                </figure>
+            </article>
+        </section>
+
+        <!-- Section 6: Data Processing -->
+        <section class="tutorial-section" id="processing">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2>معالجة البيانات</h2>
+            </div>
+
+            <!-- Function 7: df.dropna() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة السابعة: <code>df.dropna()</code></h3>
+                    <pre class="code-block"><code># حذف الفراغات
+df = df.dropna()</code></pre>
+                    <p>نستخدم هذه الدالة لحذف الفراغات. لكن كي نحفظ مجموعة البيانات بعد حذف الفراغات يجب إسناد النتيجة
+                        إلى df</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_26@26-11-2025_07-29-03.jpg" alt="df.dropna()" loading="lazy">
+                    <figcaption>حذف الفراغات</figcaption>
+                </figure>
+            </article>
+
+            <!-- Function 8: df.fillna() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة الثامنة: <code>df.fillna()</code></h3>
+                    <pre class="code-block"><code># تعبئة كل الفراغات بالعدد 6
+df = df.fillna(6)
+
+# تعبئة فراغات عمود معين
+df['sepal_length'] = df['sepal_length'].fillna(6)</code></pre>
+                    <p>إذا أردنا تعبئة الفراغات بقيم معينة بدلاً من حذفها</p>
+                </div>
+            </article>
+
+            <!-- Function 9: df.dtypes -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة التاسعة: <code>df.dtypes</code></h3>
+                    <pre class="code-block"><code>df.dtypes</code></pre>
+                    <p>لمعرفة نوع البيانات في كل عمود:</p>
+                    <ul class="result-list">
+                        <li><code>int64</code> - عدد صحيح</li>
+                        <li><code>float64</code> - عدد عشري</li>
+                        <li><code>object</code> - خليط بين الأحرف والأرقام</li>
+                        <li><code>character</code> - حروف فقط</li>
+                    </ul>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_27@26-11-2025_07-29-03.jpg" alt="df.dtypes" loading="lazy">
+                    <figcaption>أنواع البيانات</figcaption>
+                </figure>
+            </article>
+
+            <!-- Function 10: df.duplicated() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة العاشرة: <code>df.duplicated()</code></h3>
+                    <pre class="code-block"><code>df.duplicated()
+# لمعرفة عدد المكرر
+df.duplicated().sum()
+# لحذف المكرر
+df = df.drop_duplicates()</code></pre>
+                    <p>نستخدمها لمعرفة السجلات المكررة في مجموعة البيانات</p>
+                    <ul class="result-list">
+                        <li><code>False</code> - السجل لم يتكرر</li>
+                        <li><code>True</code> - السجل له نسخة مماثلة</li>
+                    </ul>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_28@26-11-2025_07-29-04.jpg" alt="df.duplicated()" loading="lazy">
+                    <figcaption>الكشف عن التكرار</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>لمعرفة عدد السجلات المكررة فقط نضيف <code>.sum()</code></p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_29@26-11-2025_07-29-34.jpg" alt="duplicated().sum()" loading="lazy">
+                    <figcaption>عدد السجلات المكررة: 3</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>لحذف السجلات المكررة نستخدم <code>df.drop_duplicates()</code></p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_30@26-11-2025_07-29-34.jpg" alt="drop_duplicates" loading="lazy">
+                    <figcaption>حذف السجلات المكررة</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>للتأكد من أن الـ 3 سجلات تم حذفها نستخدم <code>df.shape</code></p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_31@26-11-2025_07-29-34.jpg" alt="التحقق بعد الحذف" loading="lazy">
+                    <figcaption>بقي 147 سجل من أصل 150</figcaption>
+                </figure>
+            </article>
+        </section>
+
+        <!-- Section 7: Advanced Analysis -->
+        <section class="tutorial-section" id="analysis">
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2>التحليل المتقدم</h2>
+            </div>
+
+            <!-- Function 11: df.columns -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة الحادية عشرة: <code>df.columns</code></h3>
+                    <pre class="code-block"><code>df.columns</code></pre>
+                    <p>تقوم بإظهار أسماء الأعمدة. نستخدمها عادة لمعرفة العناصر الفريدة في عمود target أو label</p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_32@26-11-2025_07-29-34.jpg" alt="df.columns" loading="lazy">
+                    <figcaption>أسماء الأعمدة</figcaption>
+                </figure>
+            </article>
+
+            <!-- Function 13: df.describe() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة الثالثة عشرة: <code>df.describe()</code></h3>
+                    <pre class="code-block"><code>df.describe()</code></pre>
+                    <p>تقوم بعمل إحصائية لعدد من الخصائص:</p>
+                    <ul class="result-list">
+                        <li><code>mean</code> - الوسط الحسابي أو المعدل</li>
+                        <li><code>std</code> - الانحراف المعياري</li>
+                        <li><code>min</code> - القيمة الأدنى</li>
+                        <li><code>max</code> - القيمة الأعلى</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>الفائدة:</strong> نستفيد من هذه الدالة لمعرفة القيم المتطرفة أو الشاذة
+                    </div>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_33@26-11-2025_07-29-34.jpg" alt="df.describe()" loading="lazy">
+                    <figcaption>الإحصائيات الوصفية</figcaption>
+                </figure>
+            </article>
+
+            <!-- Function 14: df.groupby() -->
+            <article class="step-card function-card">
+                <div class="step-content">
+                    <h3 class="function-title">الدالة الرابعة عشرة: <code>df.groupby().mean()</code></h3>
+                    <pre class="code-block"><code>df.groupby('species').mean()
+# يمكن استبدال mean بـ
+df.groupby('species').std()
+df.groupby('species').min()
+df.groupby('species').max()</code></pre>
+                    <p>تقوم باستخراج الوسط الحسابي لكل عمود بناءً على مجموعة (species). هذه الطريقة تعطينا خصائص أكثر
+                        دقة من الدالة <code>df.describe()</code></p>
+                </div>
+                <figure class="step-image">
+                    <img src="photos/photo_34@26-11-2025_07-29-34.jpg" alt="groupby mean" loading="lazy">
+                    <figcaption>التجميع حسب المجموعة</figcaption>
+                </figure>
+            </article>
+
+            <article class="step-card">
+                <div class="step-content">
+                    <p>أمثلة إضافية على استخدام groupby:</p>
+                </div>
+                <div class="image-gallery">
+                    <figure class="step-image">
+                        <img src="photos/photo_35@26-11-2025_07-29-34.jpg" alt="groupby std" loading="lazy">
+                        <figcaption>الانحراف المعياري</figcaption>
+                    </figure>
+                    <figure class="step-image">
+                        <img src="photos/photo_36@26-11-2025_07-29-34.jpg" alt="groupby min" loading="lazy">
+                        <figcaption>القيمة الأدنى</figcaption>
+                    </figure>
+                    <figure class="step-image">
+                        <img src="photos/photo_37@26-11-2025_07-29-34.jpg" alt="groupby max" loading="lazy">
+                        <figcaption>القيمة الأعلى</figcaption>
+                    </figure>
+                </div>
+            </article>
+
+            <article class="step-card conclusion-card">
+                <div class="step-content">
+                    <h3>🎉 هذه كل الدوال!</h3>
+                    <p>تهانينا! لقد أكملت تعلم جميع الدوال الأساسية للتعامل مع البيانات في Python Pandas</p>
+                </div>
+            </article>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>دورة الذكاء الاصطناعي - Kaggle & Python Pandas</p>
+        <p class="credits">BTEC توجيهي - 2025</p>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="تبديل الثيم">
+        <span class="icon">🌙</span>
+    </button>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">&times;</button>
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
