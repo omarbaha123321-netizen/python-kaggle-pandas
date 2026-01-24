@@ -4,605 +4,1607 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="دورة تعليمية شاملة لتعلم الذكاء الاصطناعي باستخدام Kaggle و Python Pandas">
-    <title>دورة الذكاء الاصطناعي - Kaggle & Python Pandas</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="منصة تعليمية شاملة لتعلم Python والتعلم الآلي">
+    <title>منصة التعليم الشاملة - Python & ML</title>
+    <style>
+        /* نظام تبديل الثيمات - نظيف وبسيط */
+
+        /* الوضع الفاتح (افتراضي) */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --error: #ef4444;
+
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --bg-card: #ffffff;
+
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* الوضع الداكن */
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --accent: #fbbf24;
+            --success: #34d399;
+            --error: #f87171;
+
+            --bg: #0f172a;
+            --bg-alt: #1e293b;
+            --bg-card: #1e293b;
+
+            --text: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border: #334155;
+
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, 'Noto Sans Arabic', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            direction: rtl;
+            transition: all 0.3s;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Generic Utilities */
+        code {
+            font-family: 'Consolas', monospace;
+            background: var(--bg-alt);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--primary);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Header */
+        .site-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        /* Navigation Tabs */
+        .main-tabs {
+            background: var(--bg-card);
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: center;
+            padding: 0 10px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            background: var(--bg-alt);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Tab Content Area */
+        .tab-content {
+            display: none;
+            padding: 40px 0;
+            min-height: 600px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Existing Styles (Kaggle Tab) */
+        .tutorial-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tutorial-section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .section-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .section-intro {
+            background: var(--bg-alt);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border-right: 4px solid var(--primary);
+            color: var(--text-secondary);
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .step-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .function-card {
+            border-right: 4px solid var(--accent);
+        }
+
+        .function-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .conclusion-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            padding: 40px 25px;
+        }
+
+        /* New "Most Important" Section Style */
+        .important-notes-section {
+            background: #fffbeb;
+            /* light yellow bg for light theme */
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        [data-theme="dark"] .important-notes-section {
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .important-note-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .important-note-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .important-list {
+            list-style: none;
+        }
+
+        .important-list li {
+            margin-bottom: 15px;
+            padding-right: 25px;
+            position: relative;
+        }
+
+        .important-list li::before {
+            content: '📌';
+            position: absolute;
+            right: 0;
+            top: 2px;
+        }
+
+        /* Sidebar Layout (for Python & ML) */
+        .course-layout {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .course-sidebar {
+            width: 250px;
+            position: sticky;
+            top: 80px;
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .course-sidebar h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .course-nav {
+            list-style: none;
+        }
+
+        .course-nav li {
+            margin-bottom: 8px;
+        }
+
+        .course-nav a {
+            display: block;
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .course-nav a:hover,
+        .course-nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .course-content {
+            flex: 1;
+            min-width: 0;
+            /* Prevent overflow */
+        }
+
+        /* Code Block Styling - VS Code Dark Theme */
+        .code-block {
+            background: #1e1e1e;
+            /* VS Code Bg */
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            border: 1px solid #333;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Syntax Highlighting Classes */
+        .token.keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+
+        /* Blue */
+        .token.string {
+            color: #ce9178;
+        }
+
+        /* Orange */
+        .token.comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        /* Green */
+        .token.number {
+            color: #b5cea8;
+        }
+
+        /* Light Green */
+        .token.function {
+            color: #dcdcaa;
+        }
+
+        /* Yellow */
+        .token.operator {
+            color: #d4d4d4;
+        }
+
+        .token.built-in {
+            color: #4ec9b0;
+        }
+
+        /* Teal */
+
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Images */
+        .step-image {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .step-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .step-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .step-image figcaption {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .result-list {
+            list-style: none;
+        }
+
+        .result-list li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+        }
+
+        .result-list li::before {
+            content: '▸';
+            position: absolute;
+            right: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .info-box {
+            background: var(--bg-alt);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-right: 3px solid var(--accent);
+        }
+
+        .info-box strong {
+            color: var(--accent);
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Force Grid Display */
+        .quiz-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        /* Card Styling - Premium Look */
+        .quiz-type-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .quiz-type-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: transparent;
+        }
+
+        .quiz-type-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .quiz-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: transform 0.4s;
+            background: var(--bg-alt);
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            border-radius: 50%;
+        }
+
+        .quiz-type-card:hover .quiz-icon {
+            transform: rotate(10deg) scale(1.1);
+            background: var(--bg);
+        }
+
+        .quiz-type-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .quiz-type-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Active Quiz Card */
+        .quiz-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            text-align: right;
+            position: relative;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .option-btn {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: right;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            color: var(--text);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: var(--bg-alt);
+            transform: translateX(-5px);
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .option-btn.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .option-btn.incorrect {
+            border-color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--bg-alt);
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .app-promo {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            text-decoration: none;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .app-promo:hover {
+            transform: translateY(-2px);
+            color: white;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+        }
+
+        .lightbox-caption {
+            color: white;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 
 <body>
+
     <!-- Header Section -->
     <header class="site-header">
         <div class="header-content">
-            <h1>دورة الذكاء الاصطناعي</h1>
-            <p class="subtitle">تعلم استخدام Kaggle و Python Pandas خطوة بخطوة</p>
+            <h1>منصة الذكاء الاصطناعي الشاملة</h1>
+            <p class="subtitle">تعلم Python، تحليل البيانات، والتعلم الآلي من الصفر حتى الاحتراف</p>
         </div>
     </header>
 
-    <!-- Progress Navigation -->
-    <nav class="progress-nav" id="progressNav">
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <ul class="nav-steps">
-            <li><a href="#intro" data-step="1">المقدمة</a></li>
-            <li><a href="#setup" data-step="2">الإعداد</a></li>
-            <li><a href="#dataset" data-step="3">البيانات</a></li>
-            <li><a href="#functions" data-step="4">الدوال</a></li>
-            <li><a href="#validation" data-step="5">التحقق</a></li>
-            <li><a href="#processing" data-step="6">المعالجة</a></li>
-            <li><a href="#analysis" data-step="7">التحليل</a></li>
-        </ul>
+    <!-- Main Navigation Tabs -->
+    <nav class="main-tabs" id="mainTabNav">
+        <button class="tab-btn active" data-tab="kaggle">Kaggle</button>
+        <button class="tab-btn" data-tab="python">Python</button>
+        <button class="tab-btn" data-tab="ml">التعلم الآلي</button>
+        <button class="tab-btn" data-tab="tests">الاختبارات</button>
     </nav>
 
-    <!-- Main Tutorial Content -->
-    <main class="tutorial-container">
+    <!-- Content Container -->
+    <div class="container file-viewer-container">
 
-        <!-- Section 1: Introduction -->
-        <section class="tutorial-section" id="intro">
-            <div class="section-header">
-                <span class="section-number">01</span>
-                <h2>المقدمة إلى Kaggle</h2>
-            </div>
+        <!-- ==================== KAGGLE TAB ==================== -->
+        <div id="kaggle" class="tab-content active">
+            <div class="course-layout">
+                <aside class="course-sidebar">
+                    <h3>فهرس Kaggle</h3>
+                    <ul class="course-nav">
+                        <li><a href="#intro">1. المقدمة إلى Kaggle</a></li>
+                        <li><a href="#setup">2. إعداد مجموعة البيانات</a></li>
+                        <li><a href="#dataset">3. قراءة البيانات</a></li>
+                        <li><a href="#functions">4. دوال التحقق</a></li>
+                        <li><a href="#validation">5. التحقق من الصحة</a></li>
+                        <li><a href="#processing">6. معالجة البيانات</a></li>
+                        <li><a href="#analysis">7. التحليل المتقدم</a></li>
+                    </ul>
+                </aside>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>سنبدأ الفصل الثاني بتعلم استخدام برنامج Kaggle للذكاء الاصطناعي</p>
-                    <p>هذا تطبيق kaggle - نختار notebook</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_1@26-11-2025_07-29-03.jpg" alt="واجهة Kaggle" loading="lazy">
-                    <figcaption>اختيار Notebook في Kaggle</figcaption>
-                </figure>
-            </article>
+                <main class="course-content">
+                    <!-- Section 1 -->
+                    <section class="tutorial-section" id="intro">
+                        <div class="section-header">
+                            <span class="section-number">01</span>
+                            <h2>المقدمة إلى Kaggle</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>سنبدأ الفصل الثاني بتعلم استخدام برنامج Kaggle للذكاء الاصطناعي.</p>
+                                <p>هذا تطبيق kaggle - نختار notebook.</p>
+                            </div>
+                            <figure class="step-image">
+                                <img src="photos/photo_1@26-11-2025_07-29-03.jpg" alt="واجهة Kaggle" loading="lazy">
+                                <figcaption>اختيار Notebook في Kaggle</figcaption>
+                            </figure>
+                        </article>
+                    </section>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>الخطوة التالية هي إعادة تسمية الـ notebook لاسم جديد مرتبط بنموذج الذكاء الاصطناعي المراد تدريبه
-                    </p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_2@26-11-2025_07-29-03.jpg" alt="إعادة تسمية Notebook" loading="lazy">
-                    <figcaption>إعادة تسمية الـ Notebook</figcaption>
-                </figure>
-            </article>
-        </section>
+                    <!-- Section 2 -->
+                    <section class="tutorial-section" id="setup">
+                        <div class="section-header">
+                            <span class="section-number">02</span>
+                            <h2>إعداد مجموعة البيانات</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>الخطوة التالية هي اختيار dataset التي سوف ندرب النموذج عليها من خلال الضغط على
+                                    <code>add input+</code>
+                                </p>
+                            </div>
+                            <figure class="step-image">
+                                <img src="photos/photo_3@26-11-2025_07-29-03.jpg" alt="إضافة Dataset" loading="lazy">
+                            </figure>
+                        </article>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>في شريط البحث نكتب كلمة <strong>iris</strong> (وهي مجموعة بيانات عن زهرة السوسنة).
+                                </p>
+                            </div>
+                            <figure class="step-image">
+                                <img src="photos/photo_5@26-11-2025_07-29-03.jpg" alt="البحث عن Iris" loading="lazy">
+                            </figure>
+                        </article>
+                    </section>
 
-        <!-- Section 2: Dataset Setup -->
-        <section class="tutorial-section" id="setup">
-            <div class="section-header">
-                <span class="section-number">02</span>
-                <h2>إعداد مجموعة البيانات</h2>
-            </div>
+                    <!-- Section 3 -->
+                    <section class="tutorial-section" id="dataset">
+                        <div class="section-header"><span class="section-number">03</span>
+                            <h2>قراءة البيانات</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>تشغيل الكود الظاهر في notebook وذلك بالضغط على زر التشغيل</p>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_8@26-11-2025_07-29-03.jpg"
+                                    alt="تشغيل الكود" loading="lazy"></figure>
+                        </article>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>سوف يقوم البرنامج بإظهار رابط مجموعة البيانات</p>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_9@26-11-2025_07-29-03.jpg"
+                                    alt="رابط البيانات" loading="lazy"></figure>
+                        </article>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>الآن سوف نكتب الأمر البرمجي التالي للقراءة:</p>
+                                <pre
+                                    class="code-block"><code>df = pd.<span class="token function">read_csv</span>(<span class="token string">'path/to/iris.csv'</span>)</code></pre>
+                                <div class="info-box"><strong>ملاحظة:</strong> <code>df</code> هو Data Frame لتخزين
+                                    البيانات</div>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_11@26-11-2025_07-29-03.jpg"
+                                    alt="قراءة csv" loading="lazy"></figure>
+                        </article>
+                    </section>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>الخطوة التالية هي اختيار dataset التي سوف ندرب النموذج عليها من خلال الضغط على
-                        <code>add input+</code>
-                    </p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_3@26-11-2025_07-29-03.jpg" alt="إضافة Dataset" loading="lazy">
-                    <figcaption>إضافة مجموعة البيانات</figcaption>
-                </figure>
-            </article>
+                    <!-- Section 4 -->
+                    <section class="tutorial-section" id="functions">
+                        <div class="section-header"><span class="section-number">04</span>
+                            <h2>دوال التحقق من البيانات</h2>
+                        </div>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>الآن في الشاشة التالية نختار فلترة dataset</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_4@26-11-2025_07-29-03.jpg" alt="فلترة Dataset" loading="lazy">
-                    <figcaption>فلترة مجموعة البيانات</figcaption>
-                </figure>
-            </article>
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">1. حجم البيانات <code>df.shape</code></h3>
+                                <pre class="code-block"><code>df.shape</code></pre>
+                                <p>النتيجة (150, 5): 150 صف، 5 أعمدة</p>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_15@26-11-2025_07-29-03.jpg"
+                                    alt="shape result" loading="lazy"></figure>
+                        </article>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>في شريط البحث نكتب كلمة <strong>iris</strong> (وهي مجموعة بيانات عن زهرة السوسنة) ونلاحظ أن
-                        الفلترة هي لـ dataset حسب ما اخترناها في الخطوة السابقة. نقوم الآن بالضغط على إشارة
-                        <code>+</code> لإضافة المجموعة إلى notebook
-                    </p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_5@26-11-2025_07-29-03.jpg" alt="البحث عن Iris Dataset" loading="lazy">
-                    <figcaption>البحث عن مجموعة Iris</figcaption>
-                </figure>
-            </article>
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">2. معلومات البيانات <code>df.info()</code></h3>
+                                <pre class="code-block"><code>df.<span class="token function">info</span>()</code></pre>
+                                <p>تعرض أنواع البيانات ووجود القيم الفارغة (null)</p>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_16@26-11-2025_07-29-03.jpg"
+                                    alt="info result" loading="lazy"></figure>
+                        </article>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>بعد اختيار dataset يتغير لون إشارة <code>+</code> إلى اللون الأسود، بعدها نقوم بالضغط على إشارة
-                        <code>x</code> للخروج من النافذة
-                    </p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_6@26-11-2025_07-29-03.jpg" alt="تأكيد الاختيار" loading="lazy">
-                    <figcaption>تأكيد اختيار المجموعة</figcaption>
-                </figure>
-            </article>
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">3. عرض البداية <code>df.head()</code></h3>
+                                <pre class="code-block"><code>df.<span class="token function">head</span>()</code></pre>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_17@26-11-2025_07-29-03.jpg"
+                                    alt="head result" loading="lazy"></figure>
+                        </article>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>تظهر الآن مجموعة البيانات التي اخترناها</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_7@26-11-2025_07-29-03.jpg" alt="عرض Dataset" loading="lazy">
-                    <figcaption>مجموعة البيانات المختارة</figcaption>
-                </figure>
-            </article>
-        </section>
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">4. عرض النهاية <code>df.tail()</code></h3>
+                                <pre class="code-block"><code>df.tail()</code></pre>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_19@26-11-2025_07-29-03.jpg"
+                                    alt="tail result" loading="lazy"></figure>
+                        </article>
+                    </section>
 
-        <!-- Section 3: Reading Data -->
-        <section class="tutorial-section" id="dataset">
-            <div class="section-header">
-                <span class="section-number">03</span>
-                <h2>قراءة البيانات</h2>
-            </div>
+                    <!-- Section 5 -->
+                    <section class="tutorial-section" id="validation">
+                        <div class="section-header"><span class="section-number">05</span>
+                            <h2>التحقق من الصحة</h2>
+                        </div>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>الخطوة التالية هي تشغيل الكود الظاهر في notebook وذلك بالضغط على زر التشغيل</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_8@26-11-2025_07-29-03.jpg" alt="تشغيل الكود" loading="lazy">
-                    <figcaption>تشغيل الكود الأول</figcaption>
-                </figure>
-            </article>
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">5. حساب التكرار <code>df.value_counts()</code></h3>
+                                <pre
+                                    class="code-block"><code>df.<span class="token function">value_counts</span>(<span class="token string">'species'</span>)</code></pre>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_21@26-11-2025_07-29-03.jpg"
+                                    alt="value counts" loading="lazy"></figure>
+                        </article>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>سوف يقوم البرنامج بإظهار رابط مجموعة البيانات</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_9@26-11-2025_07-29-03.jpg" alt="رابط البيانات" loading="lazy">
-                    <figcaption>رابط مجموعة البيانات</figcaption>
-                </figure>
-            </article>
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">6. القيم الفارغة <code>df.isnull()</code></h3>
+                                <pre
+                                    class="code-block"><code>df.<span class="token function">isnull</span>().<span class="token function">sum</span>()</code></pre>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_24@26-11-2025_07-29-03.jpg"
+                                    alt="isnull sum" loading="lazy"></figure>
+                        </article>
+                    </section>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>الآن سوف نقوم بإضافة سطر برمجي جديد من خلال الضغط على <code>code+</code></p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_10@26-11-2025_07-29-03.jpg" alt="إضافة كود" loading="lazy">
-                    <figcaption>إضافة سطر برمجي جديد</figcaption>
-                </figure>
-            </article>
+                    <!-- Section 6 -->
+                    <section class="tutorial-section" id="processing">
+                        <div class="section-header"><span class="section-number">06</span>
+                            <h2>معالجة البيانات</h2>
+                        </div>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>الآن سوف نكتب الأمر البرمجي التالي:</p>
-                    <pre class="code-block"><code>df = pd.read_csv('path/to/iris.csv')</code></pre>
-                    <div class="info-box">
-                        <strong>ملاحظة:</strong> <code>df</code> هو مكان في الذاكرة نقوم بتخزين قاعدة البيانات (csv) على
-                        صورة data frame لأن لغة البرمجة بايثون لا تتعامل مع ملف csv مباشرة
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">7. حذف الفراغات <code>df.dropna()</code></h3>
+                                <pre
+                                    class="code-block"><code>df = df.<span class="token function">dropna</span>()</code></pre>
+                            </div>
+                        </article>
+
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">8. ملء الفراغات <code>df.fillna()</code></h3>
+                                <pre
+                                    class="code-block"><code>df.<span class="token function">fillna</span>(<span class="token number">0</span>)</code></pre>
+                            </div>
+                        </article>
+
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">9. التكرار <code>df.duplicated()</code></h3>
+                                <pre
+                                    class="code-block"><code>df.<span class="token function">drop_duplicates</span>()</code></pre>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_30@26-11-2025_07-29-34.jpg"
+                                    alt="duplicates" loading="lazy"></figure>
+                        </article>
+                    </section>
+
+                    <!-- Section 7 -->
+                    <section class="tutorial-section" id="analysis">
+                        <div class="section-header"><span class="section-number">07</span>
+                            <h2>التحليل المتقدم</h2>
+                        </div>
+
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">10. وصف إحصائي <code>df.describe()</code></h3>
+                                <p>يعطي المتوسط (mean)، الانحراف (std)، الأقل (min)، والأكثر (max).</p>
+                                <pre
+                                    class="code-block"><code>df.<span class="token function">describe</span>()</code></pre>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_33@26-11-2025_07-29-34.jpg" alt="describe"
+                                    loading="lazy"></figure>
+                        </article>
+
+                        <article class="step-card function-card">
+                            <div class="step-content">
+                                <h3 class="function-title">11. التجميع <code>df.groupby()</code></h3>
+                                <pre
+                                    class="code-block"><code>df.<span class="token function">groupby</span>(<span class="token string">'species'</span>).<span class="token function">mean</span>()</code></pre>
+                            </div>
+                            <figure class="step-image"><img src="photos/photo_34@26-11-2025_07-29-34.jpg" alt="groupby"
+                                    loading="lazy"></figure>
+                        </article>
+                    </section>
+
+                    <!-- NEW: Most Important Section -->
+                    <div class="important-notes-section">
+                        <div class="important-note-header">
+                            <span style="font-size: 2rem;">💡</span>
+                            <h3>اهم ما يجب حفظه في Kaggle & Pandas</h3>
+                        </div>
+                        <ul class="important-list">
+                            <li><strong>Kaggle:</strong> هو منصة عالمية لعلم البيانات توفر بيئة (Notebooks) مجانية مع
+                                GPU.</li>
+                            <li><strong>pd.read_csv():</strong> البوابة للدخول إلى البيانات. بدونها لا يمكنك بدء العمل.
+                            </li>
+                            <li><strong>df.head() & df.info():</strong> هما "عيونك" التي ترى بها البيانات لأول مرة.</li>
+                            <li><strong>df.isnull().sum():</strong> الخطوة الأولى في "التنظيف". البيانات المفقودة تدمر
+                                دقة النماذج.</li>
+                            <li><strong>df.describe():</strong> يعطيك "قصة" البيانات إحصائياً.</li>
+                            <li><strong>df.dropna() / df.fillna():</strong> هما سلاحك ضد البيانات المفقودة.</li>
+                        </ul>
                     </div>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_11@26-11-2025_07-29-03.jpg" alt="كتابة pd.read_csv" loading="lazy">
-                    <figcaption>كتابة أمر قراءة البيانات</figcaption>
-                </figure>
-            </article>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>في الأمر السابق تم استدعاء دالة <code>read_csv</code> من مكتبة <code>pandas</code> والتي تم
-                        تسميتها <code>pd</code> لسهولة التعامل معها</p>
-                    <p>الآن سوف ننسخ (copy) مسار مجموعة البيانات (dataset) ونضعه بين الأقواس مع وضع علامة الاقتباس
-                        <code>' '</code>
-                    </p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_12@26-11-2025_07-29-03.jpg" alt="نسخ المسار" loading="lazy">
-                    <figcaption>نسخ مسار البيانات</figcaption>
-                </figure>
-            </article>
+                </main>
+            </div>
+        </div>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>الآن نضغط على زر التشغيل</p>
-                    <div class="info-box">
-                        <strong>ملاحظة:</strong> هنا لن نحصل على نتائج، فقط يقوم البرنامج بتخزين مجموعة البيانات في الـ
-                        Data Frame
+        <!-- ==================== PYTHON TAB ==================== -->
+        <div id="python" class="tab-content">
+            <div class="course-layout">
+                <aside class="course-sidebar">
+                    <h3>فهرس بايثون</h3>
+                    <ul class="course-nav" id="pythonNav">
+                        <li><a href="#py-vars">1. المتغيرات والتعريفات</a></li>
+                        <li><a href="#py-types">2. أنواع البيانات</a></li>
+                        <li><a href="#py-math">3. العمليات الحسابية</a></li>
+                        <li><a href="#py-if">4. الشروط (IF)</a></li>
+                        <li><a href="#py-loops">5. الحلقات (Loops)</a></li>
+                        <li><a href="#py-func">6. الدوال (Functions)</a></li>
+                        <li><a href="#py-errors">7. معالجة الأخطاء</a></li>
+                        <li><a href="#py-oop">8. البرمجة الكائنية (OOP)</a></li>
+                        <li><a href="#py-libs">9. المكتبات (Libraries)</a></li>
+                    </ul>
+                </aside>
+
+                <main class="course-content" id="pythonContent" style="scroll-behavior: smooth;">
+
+                    <!-- Section 1: Variables -->
+                    <section id="py-vars" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">01</span>
+                            <h2>المتغيرات والتعريفات</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>المتغير (Variable) هو مكان في الذاكرة نستخدمه لتخزين قيمة معينة. في بايثون، لا نحتاج
+                                    لتحديد نوع المتغير مسبقاً.</p>
+                                <pre class="code-block"><code>x = 5           # متغير يخزن عدداً صحيحاً
+name = "Ahmed"  # متغير يخزن نصاً
+price = 10.5    # متغير يخزن عدداً عشرياً</code></pre>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Section 2: Data Types -->
+                    <section id="py-types" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">02</span>
+                            <h2>أنواع البيانات</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>بايثون توفر أنواع بيانات قوية ومتنوعة:</p>
+                                <ul>
+                                    <li><strong>Strings (نص):</strong> "Hello"</li>
+                                    <li><strong>Integers (عدد صحيح):</strong> 10</li>
+                                    <li><strong>Floats (عدد عشري):</strong> 3.14</li>
+                                    <li><strong>Lists (قائمة):</strong> [1, 2, 3]</li>
+                                    <li><strong>Tuples (قائمة ثابتة):</strong> (1, 2)</li>
+                                    <li><strong>Dictionaries (قاموس):</strong> {"key": "value"}</li>
+                                    <li><strong>Sets (مجموعة):</strong> {1, 2, 3}</li>
+                                </ul>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Section 3: Operations -->
+                    <section id="py-math" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">03</span>
+                            <h2>العمليات الحسابية والمنطقية</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>يمكن إجراء كافة العمليات الرياضية بسهولة:</p>
+                                <pre class="code-block"><code>print(10 + 5)  # جمع
+print(10 - 5)  # طرح
+print(10 * 5)  # ضرب
+print(10 / 5)  # قسمة (الناتج عشري)
+print(10 % 3)  # باقي القسمة (Modulus)
+print(2 ** 3)  # الأس (2 أس 3)</code></pre>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Section 4: IF Conditions -->
+                    <section id="py-if" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">04</span>
+                            <h2>جملة الشروط (IF Statements)</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>تستخدم لاتخاذ قرارات بناءً على شروط معينة:</p>
+                                <pre class="code-block"><code>age = 18
+if age >= 18:
+    print("أنت بالغ")
+elif age > 12:
+    print("أنت مراهق")
+else:
+    print("أنت طفل")</code></pre>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Section 5: Loops -->
+                    <section id="py-loops" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">05</span>
+                            <h2>الحلقات (Loops)</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>لدينا نوعان رئيسيان: For و While.</p>
+                                <h4>FOR Loop:</h4>
+                                <pre class="code-block"><code># طباعة الأرقام من 0 إلى 4
+for i in range(5):
+    print(i)
+
+# المرور على عناصر قائمة
+fruits = ["Apple", "Banana"]
+for fruit in fruits:
+    print(fruit)</code></pre>
+
+                                <h4>WHILE Loop:</h4>
+                                <pre class="code-block"><code>count = 0
+while count < 5:
+    print(count)
+    count += 1</code></pre>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Section 6: Functions -->
+                    <section id="py-func" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">06</span>
+                            <h2>الدوال (Functions)</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>الدالة هي "مجموعة كود" نعطيها اسماً ونستدعيها عند الحاجة، وتساعد في تنظيم الكود ومنع
+                                    التكرار.</p>
+                                <pre class="code-block"><code>def greet(name):
+    return f"مرحباً {name}!"
+
+# استدعاء الدالة
+message = greet("خالد")
+print(message)</code></pre>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Section 7: Error Handling -->
+                    <section id="py-errors" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">07</span>
+                            <h2>معالجة الأخطاء (Try-Except)</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>لمنع توقف البرنامج عند حدوث خطأ، نستخدم Try-Except.</p>
+                                <pre class="code-block"><code>try:
+    print(10 / 0)  # خطأ قسمة على صفر
+except ZeroDivisionError:
+    print("لا يمكن القسمة على صفر!")
+except Exception as e:
+    print(f"حدث خطأ آخر: {e}")</code></pre>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Section 8: OOP Intro -->
+                    <section id="py-oop" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">08</span>
+                            <h2>البرمجة الكائنية التوجه (OOP)</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>هي نمط برمجة يعتمد على "الكائنات" (Objects) التي تحتوي على بيانات ودوال.</p>
+                                <pre class="code-block"><code>class Car:
+    def __init__(self, color, model):
+        self.color = color
+        self.model = model
+
+    def drive(self):
+        print(f"السيارة {self.model} تتحرك!")
+
+# إنشاء كائن
+my_car = Car("Red", "Toyota")
+my_car.drive()</code></pre>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Section 9: Libraries -->
+                    <section id="py-libs" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">09</span>
+                            <h2>المكتبات والـ Imports</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>المكتبات هي أكواد جاهزة كتبها آخرون لتسهيل عملنا. نستدعيها بـ <code>import</code>.
+                                </p>
+                                <pre class="code-block"><code>import math
+print(math.sqrt(16))  # الجذر التربيعي
+
+import random
+print(random.randint(1, 10))  # رقم عشوائي</code></pre>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Unified Most Important Section -->
+                    <div class="important-notes-section">
+                        <div class="important-note-header">
+                            <span style="font-size: 2rem;">💡</span>
+                            <h3>ملخص أهم ما يجب حفظه في Python</h3>
+                        </div>
+                        <ul class="important-list">
+                            <li><strong>المتغيرات:</strong> يجب أن تبدأ بحرف أو (_)، وحساسة لحالة الأحرف.</li>
+                            <li><strong>الأنواع:</strong> القوائم `[]` قابلة للتعديل، أما Tuples `()` ثابتة. والقواميس
+                                `{}` للمفتاح والقيمة.</li>
+                            <li><strong>العمليات:</strong> `//` للقسمة الصحيحة، و `==` للمقارنة، و `**` للأس.</li>
+                            <li><strong>IF:</strong> المسافة البادئة (Indentation) هي روح بايثون.</li>
+                            <li><strong>Loops:</strong> `range()` تولد أرقاماً، `break` توقف الحلقة.</li>
+                            <li><strong>الدوال:</strong> تُعرف بـ `def`، والمتغيرات داخلها لا تُرى خارجها.</li>
+                            <li><strong>OOP:</strong> `class` هو المخطط، `__init__` للبناء، و `self` للكائن الحالي.</li>
+                            <li><strong>المكتبات:</strong> `pip install` للتثبيت، و `import` للاستخدام.</li>
+                        </ul>
                     </div>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_13@26-11-2025_07-29-03.jpg" alt="تشغيل read_csv" loading="lazy">
-                    <figcaption>تشغيل أمر القراءة</figcaption>
-                </figure>
-            </article>
-        </section>
 
-        <!-- Section 4: Data Functions -->
-        <section class="tutorial-section" id="functions">
-            <div class="section-header">
-                <span class="section-number">04</span>
-                <h2>دوال التحقق من البيانات</h2>
+                </main>
             </div>
+        </div>
 
-            <p class="section-intro">الآن سوف نقوم بكتابة بعض الدوال التي من خلالها نتأكد ونتحقق من جودة البيانات</p>
-
-            <!-- Function 1: df.shape -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة الأولى: <code>df.shape</code></h3>
-                    <pre class="code-block"><code>df.shape</code></pre>
-                    <p>نقوم بإضافة <code>code+</code> جديد ونكتب <code>df.shape</code></p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_14@26-11-2025_07-29-03.jpg" alt="df.shape" loading="lazy">
-                    <figcaption>كتابة df.shape</figcaption>
-                </figure>
-            </article>
-
-            <article class="step-card">
-                <div class="step-content">
-                    <p>نقوم بالضغط على زر التشغيل فتظهر <code>(150, 5)</code> وهي حجم مجموعة البيانات:</p>
-                    <ul class="result-list">
-                        <li><strong>150</strong> - عدد السجلات (الصفوف أو الكائنات أو records أو instances)</li>
-                        <li><strong>5</strong> - عدد الأعمدة (features أو attributes)</li>
+        <!-- ==================== ML TAB ==================== -->
+        <div id="ml" class="tab-content">
+            <div class="course-layout">
+                <aside class="course-sidebar">
+                    <h3>فهرس تعلم الآلة</h3>
+                    <ul class="course-nav" id="mlNav">
+                        <li><a href="#ml-intro">1. مقدمة: AI vs ML</a></li>
+                        <li><a href="#ml-types">2. أنواع تعلم الآلة</a></li>
+                        <li><a href="#ml-metrics">3. مقاييس الأداء</a></li>
+                        <li><a href="#ml-pandas">4. Pandas & NumPy</a></li>
+                        <li><a href="#ml-sklearn">5. Scikit-Learn</a></li>
                     </ul>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_15@26-11-2025_07-29-03.jpg" alt="نتيجة df.shape" loading="lazy">
-                    <figcaption>نتيجة df.shape</figcaption>
-                </figure>
-            </article>
+                </aside>
 
-            <!-- Function 2: df.info() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة الثانية: <code>df.info()</code></h3>
-                    <pre class="code-block"><code>df.info()</code></pre>
-                    <p>تقوم بفحص كافة البيانات لمعرفة الخلايا الفارغة ونوع البيانات في الخلايا (cell)</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_16@26-11-2025_07-29-03.jpg" alt="df.info()" loading="lazy">
-                    <figcaption>نتيجة df.info()</figcaption>
-                </figure>
-            </article>
+                <main class="course-content" id="mlContent" style="scroll-behavior: smooth;">
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>النتائج التي حصلنا عليها:</p>
-                    <ul class="result-list">
-                        <li><code>non-null</code> - تعني أنه لا يوجد خلايا فارغة</li>
-                        <li><code>float64</code> - تعني أن الخلايا تحتوي على أعداد عشرية</li>
-                        <li><code>object</code> - تعني أن الخلايا تحتوي على نص</li>
-                    </ul>
-                </div>
-            </article>
+                    <!-- Section 1: Introduction (AI vs ML vs DL) -->
+                    <section id="ml-intro" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">01</span>
+                            <h2>مقدمة: الذكاء الاصطناعي (AI)</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>من المهم جداً فهم الفرق بين المصطلحات الثلاثة، حيث يمكن تخيلهم كدوائر متداخلة:</p>
+                                <ul style="list-style: none; padding-right: 0;">
+                                    <li style="margin-bottom: 15px;">
+                                        <strong style="font-size: 1.2rem; color: var(--primary);">1. الذكاء الاصطناعي
+                                            (AI):</strong>
+                                        <br>هو المجال العام والأشمل، ويعني جعل الآلة تحاكي ذكاء البشر (مثل الروبوتات،
+                                        وأنظمة التوصية).
+                                    </li>
+                                    <li style="margin-bottom: 15px;">
+                                        <strong style="font-size: 1.2rem; color: var(--accent);">2. تعلم الآلة (Machine
+                                            Learning):</strong>
+                                        <br>هو فرع من AI. بدلاً من برمجة الآلة بالأوامر المباشرة (If-Else)، نجعلها
+                                        "تتعلم" من البيانات لاكتشاف الأنماط بنفسها.
+                                    </li>
+                                    <li>
+                                        <strong style="font-size: 1.2rem; color: var(--success);">3. التعلم العميق (Deep
+                                            Learning):</strong>
+                                        <br>هو فرع من ML. يعتمد على "الشبكات العصبية" (Neural Networks) ويحاكي طريقة عمل
+                                        دماغ الإنسان، ويستخدم للبيانات المعقدة جداً مثل الصور والصوت.
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+                    </section>
 
-            <!-- Function 3: df.head() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة الثالثة: <code>df.head()</code></h3>
-                    <pre class="code-block"><code>df.head()
-# أو لعرض 10 سجلات
-df.head(10)</code></pre>
-                    <p>تقوم بعرض أول 5 سجلات من بداية مجموعة البيانات. الترقيم للسجلات أو الأعمدة يبدأ من الرقم صفر.</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_17@26-11-2025_07-29-03.jpg" alt="df.head()" loading="lazy">
-                    <figcaption>نتيجة df.head()</figcaption>
-                </figure>
-            </article>
+                    <!-- Section 2: Types of ML -->
+                    <section id="ml-types" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">02</span>
+                            <h2>أنواع تعلم الآلة (ML Types)</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>ينقسم تعلم الآلة إلى 4 أنواع رئيسية حسب "كيفية تعلم الآلة":</p>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>كما يمكننا تحديد عدد السجلات التي نريد عرضها (مثال: عرض 10 سجلات)</p>
-                    <div class="info-box">
-                        <strong>الفائدة:</strong> نستخدم دالة <code>df.head()</code> للتأكد من أن القيم متناسقة وليس
-                        هناك أي قيم شاذة
+                                <h3 style="color: var(--primary); margin-top: 20px;">1. التعلم الموجه (Supervised
+                                    Learning)</h3>
+                                <p>هنا المعلم موجود! نعطي الآلة البيانات (Data) <strong>و</strong> الإجابات (Labels).
+                                </p>
+                                <p><em>مثال:</em> نعطيها صور قطط وكلاب ونخبرها "هذه قطة" و "هذا كلب"، ثم نطلب منها
+                                    التمييز.</p>
+                                <div class="info-box">
+                                    <strong>ينقسم إلى:</strong>
+                                    <ul>
+                                        <li><strong>Regression (انحدار):</strong> لتوقع أرقام (سعر منزل، درجة حرارة).
+                                        </li>
+                                        <li><strong>Classification (تصنيف):</strong> لتوقع فئات (ناجح/راسب، مريض/سليم).
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <h3 style="color: var(--primary); margin-top: 20px;">2. التعلم غير الموجه (Unsupervised
+                                    Learning)</h3>
+                                <p>هنا المعلم غائب! نعطي الآلة بيانات <strong>بدون</strong> إجابات، وعليها اكتشاف
+                                    الأنماط بنفسها.</p>
+                                <div class="info-box">
+                                    <strong>أشهر خوارزمياته:</strong>
+                                    <ul>
+                                        <li><strong>Clustering (التجميع):</strong> تقسيم البيانات لمجموعات متشابهة (مثل
+                                            تقسيم العملاء في التسويق).</li>
+                                    </ul>
+                                </div>
+
+                                <h3 style="color: var(--primary); margin-top: 20px;">3. التعلم شبه الموجه
+                                    (Semi-Supervised)</h3>
+                                <p>مزيج بين الاثنين. لدينا كمية ضخمة من البيانات، لكن القليل منها فقط له إجابات
+                                    (Labels).</p>
+
+                                <h3 style="color: var(--primary); margin-top: 20px;">4. التعلم التعزيزي (Reinforcement
+                                    Learning)</h3>
+                                <p>التعلم عن طريق "المكافأة والعقاب". مثل تدريب روبوت على المشي: إذا سقط نعاقبه (نخصم
+                                    نقاط)، وإذا مشى نكافئه.</p>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Section 3: Metrics -->
+                    <section id="ml-metrics" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">03</span>
+                            <h2>مقاييس الأداء (Evaluation Metrics)</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>كيف نعرف أن نموذجنا جيد؟</p>
+                                <h4>للتصنيف (Classification):</h4>
+                                <ul>
+                                    <li><strong>Accuracy:</strong> دقة النموذج الكلية.</li>
+                                    <li><strong>Precision & Recall:</strong> دقة التنبؤ بالإيجابيات.</li>
+                                    <li><strong>Confusion Matrix:</strong> جدول يوضح أين أخطأ النموذج.</li>
+                                </ul>
+
+                                <h4>للانحدار (Regression):</h4>
+                                <ul>
+                                    <li><strong>MAE (Mean Absolute Error):</strong> متوسط الخطأ المطلق.</li>
+                                    <li><strong>MSE (Mean Squared Error):</strong> متوسط مربع الخطأ.</li>
+                                </ul>
+                            </div>
+                        </article>
+
+                        <div class="important-notes-section">
+                            <div class="important-note-header"><span>💡</span>
+                                <h3>أهم ما يجب حفظه</h3>
+                            </div>
+                            <ul class="important-list">
+                                <li>في التصنيف، لا تعتمد فقط على Accuracy، خاصة إذا كانت البيانات غير متوازنة
+                                    (Imbalanced).</li>
+                                <li><code>model.score(X, y)</code> يعطيك التقييم الافتراضي للنموذج.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Pandas & NumPy -->
+                    <section id="ml-pandas" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">05</span>
+                            <h2>Pandas & NumPy للتعلم الآلي</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>هما حجر الأساس لأي مشروع ML.</p>
+                                <p><strong>NumPy:</strong> للعمليات الحسابية السريعة والمصفوفات.</p>
+                                <p><strong>Pandas:</strong> للتعامل مع الجداول (DataFrames) وتنظيف البيانات.</p>
+                                <pre class="code-block"><code><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+
+<span class="token comment"># تحويل البيانات إلى مصفوفة للفهم بواسطة النموذج</span>
+X = df[[<span class="token string">'feature1'</span>, <span class="token string">'feature2'</span>]].values
+y = df[<span class="token string">'target'</span>].values</code></pre>
+                            </div>
+                        </article>
+
+                        <div class="important-notes-section">
+                            <div class="important-note-header"><span>💡</span>
+                                <h3>أهم ما يجب حفظه</h3>
+                            </div>
+                            <ul class="important-list">
+                                <li>النماذج (Scikit-Learn) تفضل التعامل مع مصفوفات NumPy أو Pandas DataFrames رقمية.
+                                </li>
+                                <li>يجب تحويل النصوص إلى أرقام (Encoding) قبل التدريب.</li>
+
+                    </section>
+
+                    <!-- Section 6: Scikit-Learn -->
+                    <section id="ml-sklearn" class="tutorial-section">
+                        <div class="section-header">
+                            <span class="section-number">06</span>
+                            <h2>استخدام Scikit-Learn</h2>
+                        </div>
+                        <article class="step-card">
+                            <div class="step-content">
+                                <p>هي المكتبة الأشهر والأقوى للتعلم الآلي التقليدي في بايثون.</p>
+                                <p><strong>الخطوات الثابتة لأي مشروع:</strong></p>
+                                <ol style="margin-right: 20px;">
+                                    <li>استيراد النموذج:
+                                        <code><span class="token keyword">from</span> sklearn... <span class="token keyword">import</span> X</code>
+                                    </li>
+                                    <li>إنشاء نسخة: <code>model = <span class="token function">X</span>()</code></li>
+                                    <li>تدريب النموذج:
+                                        <code>model.<span class="token function">fit</span>(X_train, y_train)</code>
+                                    </li>
+                                    <li>التنبؤ: <code>model.<span class="token function">predict</span>(X_test)</code>
+                                    </li>
+                                    <li>التقييم:
+                                        <code>model.<span class="token function">score</span>(X_test, y_test)</code>
+                                    </li>
+                                </ol>
+                            </div>
+                        </article>
+
+
+                    </section>
+
+                    <!-- Unified Most Important Section -->
+                    <div class="important-notes-section">
+                        <div class="important-note-header">
+                            <span style="font-size: 2rem;">💡</span>
+                            <h3>ملخص أهم ما يجب حفظه في ML</h3>
+                        </div>
+                        <ul class="important-list">
+                            <li><strong>الهدف:</strong> التعميم (Generalization) وليس الحفظ.</li>
+                            <li><strong>Features (X):</strong> المدخلات، وتكون عادة مصفوفة ثنائية الأبعاد.</li>
+                            <li><strong>Target (y):</strong> المخرج المطلوب توقعه.</li>
+                            <li><strong>Supervised:</strong> بيانات مع إجابات (مثل أسعار المنازل).</li>
+                            <li><strong>Unsupervised:</strong> بيانات بدون إجابات (مثل تجميع العملاء).</li>
+                            <li><strong>Linear Regression:</strong> للانحدار (أرقام).</li>
+                            <li><strong>Logistic Regression:</strong> للتصنيف (فئات).</li>
+                            <li><strong>train_test_split:</strong> ضرورية جداً لفصل بيانات الاختبار عن التدريب.</li>
+                            <li><strong>fit():</strong> هي التدريب. <strong>predict():</strong> هي التوقع.</li>
+                            <li><strong>Fit on Train Only:</strong> لا تتدرب أبداً على بيانات الاختبار!</li>
+                        </ul>
                     </div>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_18@26-11-2025_07-29-03.jpg" alt="df.head(10)" loading="lazy">
-                    <figcaption>عرض 10 سجلات</figcaption>
-                </figure>
-            </article>
 
-            <!-- Function 4: df.tail() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة الرابعة: <code>df.tail()</code></h3>
-                    <pre class="code-block"><code>df.tail()</code></pre>
-                    <p>تستخدم لعرض السجلات لكن من آخر سجل في مجموعة البيانات. ويمكن أيضاً تحديد عدد السجلات المراد عرضها
-                        مثل head</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_19@26-11-2025_07-29-03.jpg" alt="df.tail()" loading="lazy">
-                    <figcaption>نتيجة df.tail()</figcaption>
-                </figure>
-            </article>
-        </section>
+                </main>
+            </div>
+        </div>
+    </div>
 
-        <!-- Section 5: Data Validation -->
-        <section class="tutorial-section" id="validation">
-            <div class="section-header">
-                <span class="section-number">05</span>
-                <h2>التحقق من صحة البيانات</h2>
+    <!-- ==================== TESTS TAB ==================== -->
+    <div id="tests" class="tab-content">
+        <!-- 1. Intro View: Select Quiz Type -->
+        <div id="quiz-intro" class="quiz-container">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2>اختبر معلوماتك 🧠</h2>
+                <p style="color: var(--text-secondary);">اختر نوع الاختبار للبدء، سيتم اختيار أسئلة عشوائية في كل مرة!
+                </p>
             </div>
 
-            <p class="section-intro">اليوم تم استكمال الدوال (function) التي نطبقها على مجموعة البيانات (dataset) للتأكد
-                من صحتها وجودتها</p>
-
-            <figure class="step-image standalone">
-                <img src="photos/photo_20@26-11-2025_07-29-03.jpg" alt="جدول الدوال" loading="lazy">
-                <figcaption>جدول الدوال الأساسية</figcaption>
-            </figure>
-
-            <!-- Function 5: df.value_counts() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة الخامسة: <code>df.value_counts()</code></h3>
-                    <pre class="code-block"><code>df.value_counts()
-# أو لعمود معين
-df.value_counts('species')</code></pre>
-                    <p>تقوم هذه الدالة بحساب التكرار بناءً على السجلات في مجموعة البيانات</p>
+            <div class="quiz-selection-grid">
+                <div class="quiz-type-card" onclick="startQuiz('python')">
+                    <div class="quiz-icon">🐍</div>
+                    <h3>اختبار Python</h3>
+                    <p>20 سؤال عشوائي في أساسيات بايثون</p>
                 </div>
-                <figure class="step-image">
-                    <img src="photos/photo_21@26-11-2025_07-29-03.jpg" alt="value_counts" loading="lazy">
-                    <figcaption>نتيجة value_counts</figcaption>
-                </figure>
-            </article>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>نلاحظ وجود تكرار لسجل 3 مرات وسجل آخر مرتان وباقي السجلات تكررت مرة واحدة فقط</p>
-                    <p>في نفس الدالة يمكننا معرفة التكرار ضمن عمود وذلك بكتابة اسم العمود بين إشارات الاقتباس المفردة
-                    </p>
+                <div class="quiz-type-card" onclick="startQuiz('ml')">
+                    <div class="quiz-icon">🤖</div>
+                    <h3>اختبار ML & Data</h3>
+                    <p>20 سؤال عشوائي في الذكاء الاصطناعي</p>
                 </div>
-                <figure class="step-image">
-                    <img src="photos/photo_22@26-11-2025_07-29-03.jpg" alt="value_counts لعمود" loading="lazy">
-                    <figcaption>التكرار ضمن عمود معين</figcaption>
-                </figure>
-            </article>
 
-            <!-- Function 6: df.isnull() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة السادسة: <code>df.isnull()</code></h3>
-                    <pre class="code-block"><code>df.isnull()
-# لمعرفة عدد الفراغات
-df.isnull().sum()
-# لمعرفة وجود فراغات
-df.isnull().any()</code></pre>
-                    <p>تستخدم لمعرفة الخلايا الفارغة في مجموعة البيانات</p>
-                    <ul class="result-list">
-                        <li><code>False</code> - لا يوجد فراغ</li>
-                        <li><code>True</code> - يوجد فراغ</li>
-                    </ul>
+                <div class="quiz-type-card" onclick="startQuiz('mix')">
+                    <div class="quiz-icon">🔥</div>
+                    <h3>تحدي شامل (Mix)</h3>
+                    <p>20 سؤال مختلط للمحترفين فقط!</p>
                 </div>
-                <figure class="step-image">
-                    <img src="photos/photo_23@26-11-2025_07-29-03.jpg" alt="df.isnull()" loading="lazy">
-                    <figcaption>نتيجة df.isnull()</figcaption>
-                </figure>
-            </article>
+            </div>
+        </div>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>يمكن الحصول على عدد الفراغات في كل عمود عن طريق إضافة <code>.sum()</code></p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_24@26-11-2025_07-29-03.jpg" alt="isnull().sum()" loading="lazy">
-                    <figcaption>عدد الفراغات في كل عمود</figcaption>
-                </figure>
-            </article>
-
-            <article class="step-card">
-                <div class="step-content">
-                    <p>كما يمكننا معرفة إذا ما كان هناك فراغات في الأعمدة دون تحديد عددها وذلك بإضافة
-                        <code>.any()</code>
-                    </p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_25@26-11-2025_07-29-03.jpg" alt="isnull().any()" loading="lazy">
-                    <figcaption>التحقق من وجود فراغات</figcaption>
-                </figure>
-            </article>
-        </section>
-
-        <!-- Section 6: Data Processing -->
-        <section class="tutorial-section" id="processing">
-            <div class="section-header">
-                <span class="section-number">06</span>
-                <h2>معالجة البيانات</h2>
+        <div class="quiz-selection-grid">
+            <div class="quiz-type-card" onclick="startQuiz('python')">
+                <div class="quiz-icon">🐍</div>
+                <h3>اختبار Python</h3>
+                <p>20 سؤال عشوائي في أساسيات بايثون</p>
             </div>
 
-            <!-- Function 7: df.dropna() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة السابعة: <code>df.dropna()</code></h3>
-                    <pre class="code-block"><code># حذف الفراغات
-df = df.dropna()</code></pre>
-                    <p>نستخدم هذه الدالة لحذف الفراغات. لكن كي نحفظ مجموعة البيانات بعد حذف الفراغات يجب إسناد النتيجة
-                        إلى df</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_26@26-11-2025_07-29-03.jpg" alt="df.dropna()" loading="lazy">
-                    <figcaption>حذف الفراغات</figcaption>
-                </figure>
-            </article>
-
-            <!-- Function 8: df.fillna() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة الثامنة: <code>df.fillna()</code></h3>
-                    <pre class="code-block"><code># تعبئة كل الفراغات بالعدد 6
-df = df.fillna(6)
-
-# تعبئة فراغات عمود معين
-df['sepal_length'] = df['sepal_length'].fillna(6)</code></pre>
-                    <p>إذا أردنا تعبئة الفراغات بقيم معينة بدلاً من حذفها</p>
-                </div>
-            </article>
-
-            <!-- Function 9: df.dtypes -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة التاسعة: <code>df.dtypes</code></h3>
-                    <pre class="code-block"><code>df.dtypes</code></pre>
-                    <p>لمعرفة نوع البيانات في كل عمود:</p>
-                    <ul class="result-list">
-                        <li><code>int64</code> - عدد صحيح</li>
-                        <li><code>float64</code> - عدد عشري</li>
-                        <li><code>object</code> - خليط بين الأحرف والأرقام</li>
-                        <li><code>character</code> - حروف فقط</li>
-                    </ul>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_27@26-11-2025_07-29-03.jpg" alt="df.dtypes" loading="lazy">
-                    <figcaption>أنواع البيانات</figcaption>
-                </figure>
-            </article>
-
-            <!-- Function 10: df.duplicated() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة العاشرة: <code>df.duplicated()</code></h3>
-                    <pre class="code-block"><code>df.duplicated()
-# لمعرفة عدد المكرر
-df.duplicated().sum()
-# لحذف المكرر
-df = df.drop_duplicates()</code></pre>
-                    <p>نستخدمها لمعرفة السجلات المكررة في مجموعة البيانات</p>
-                    <ul class="result-list">
-                        <li><code>False</code> - السجل لم يتكرر</li>
-                        <li><code>True</code> - السجل له نسخة مماثلة</li>
-                    </ul>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_28@26-11-2025_07-29-04.jpg" alt="df.duplicated()" loading="lazy">
-                    <figcaption>الكشف عن التكرار</figcaption>
-                </figure>
-            </article>
-
-            <article class="step-card">
-                <div class="step-content">
-                    <p>لمعرفة عدد السجلات المكررة فقط نضيف <code>.sum()</code></p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_29@26-11-2025_07-29-34.jpg" alt="duplicated().sum()" loading="lazy">
-                    <figcaption>عدد السجلات المكررة: 3</figcaption>
-                </figure>
-            </article>
-
-            <article class="step-card">
-                <div class="step-content">
-                    <p>لحذف السجلات المكررة نستخدم <code>df.drop_duplicates()</code></p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_30@26-11-2025_07-29-34.jpg" alt="drop_duplicates" loading="lazy">
-                    <figcaption>حذف السجلات المكررة</figcaption>
-                </figure>
-            </article>
-
-            <article class="step-card">
-                <div class="step-content">
-                    <p>للتأكد من أن الـ 3 سجلات تم حذفها نستخدم <code>df.shape</code></p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_31@26-11-2025_07-29-34.jpg" alt="التحقق بعد الحذف" loading="lazy">
-                    <figcaption>بقي 147 سجل من أصل 150</figcaption>
-                </figure>
-            </article>
-        </section>
-
-        <!-- Section 7: Advanced Analysis -->
-        <section class="tutorial-section" id="analysis">
-            <div class="section-header">
-                <span class="section-number">07</span>
-                <h2>التحليل المتقدم</h2>
+            <div class="quiz-type-card" onclick="startQuiz('ml')">
+                <div class="quiz-icon">🤖</div>
+                <h3>اختبار ML & Data</h3>
+                <p>20 سؤال عشوائي في الذكاء الاصطناعي</p>
             </div>
 
-            <!-- Function 11: df.columns -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة الحادية عشرة: <code>df.columns</code></h3>
-                    <pre class="code-block"><code>df.columns</code></pre>
-                    <p>تقوم بإظهار أسماء الأعمدة. نستخدمها عادة لمعرفة العناصر الفريدة في عمود target أو label</p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_32@26-11-2025_07-29-34.jpg" alt="df.columns" loading="lazy">
-                    <figcaption>أسماء الأعمدة</figcaption>
-                </figure>
-            </article>
+            <div class="quiz-type-card" onclick="startQuiz('mix')">
+                <div class="quiz-icon">🔥</div>
+                <h3>تحدي شامل (Mix)</h3>
+                <p>20 سؤال مختلط للمحترفين فقط!</p>
+            </div>
+        </div>
+    </div>
 
-            <!-- Function 13: df.describe() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة الثالثة عشرة: <code>df.describe()</code></h3>
-                    <pre class="code-block"><code>df.describe()</code></pre>
-                    <p>تقوم بعمل إحصائية لعدد من الخصائص:</p>
-                    <ul class="result-list">
-                        <li><code>mean</code> - الوسط الحسابي أو المعدل</li>
-                        <li><code>std</code> - الانحراف المعياري</li>
-                        <li><code>min</code> - القيمة الأدنى</li>
-                        <li><code>max</code> - القيمة الأعلى</li>
-                    </ul>
-                    <div class="info-box">
-                        <strong>الفائدة:</strong> نستفيد من هذه الدالة لمعرفة القيم المتطرفة أو الشاذة
-                    </div>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_33@26-11-2025_07-29-34.jpg" alt="df.describe()" loading="lazy">
-                    <figcaption>الإحصائيات الوصفية</figcaption>
-                </figure>
-            </article>
+    <!-- 2. Active Quiz View -->
+    <div id="quiz-active" class="quiz-container" style="display: none;">
+        <div class="quiz-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold;">
+                <span id="quiz-score">النتيجة: 0</span>
+                <span id="quiz-progress" style="color: var(--primary);">سؤال 1 / 10</span>
+            </div>
 
-            <!-- Function 14: df.groupby() -->
-            <article class="step-card function-card">
-                <div class="step-content">
-                    <h3 class="function-title">الدالة الرابعة عشرة: <code>df.groupby().mean()</code></h3>
-                    <pre class="code-block"><code>df.groupby('species').mean()
-# يمكن استبدال mean بـ
-df.groupby('species').std()
-df.groupby('species').min()
-df.groupby('species').max()</code></pre>
-                    <p>تقوم باستخراج الوسط الحسابي لكل عمود بناءً على مجموعة (species). هذه الطريقة تعطينا خصائص أكثر
-                        دقة من الدالة <code>df.describe()</code></p>
-                </div>
-                <figure class="step-image">
-                    <img src="photos/photo_34@26-11-2025_07-29-34.jpg" alt="groupby mean" loading="lazy">
-                    <figcaption>التجميع حسب المجموعة</figcaption>
-                </figure>
-            </article>
+            <h3 id="question-text" style="margin-bottom: 30px; font-size: 1.3rem;">نص السؤال هنا؟
+            </h3>
 
-            <article class="step-card">
-                <div class="step-content">
-                    <p>أمثلة إضافية على استخدام groupby:</p>
-                </div>
-                <div class="image-gallery">
-                    <figure class="step-image">
-                        <img src="photos/photo_35@26-11-2025_07-29-34.jpg" alt="groupby std" loading="lazy">
-                        <figcaption>الانحراف المعياري</figcaption>
-                    </figure>
-                    <figure class="step-image">
-                        <img src="photos/photo_36@26-11-2025_07-29-34.jpg" alt="groupby min" loading="lazy">
-                        <figcaption>القيمة الأدنى</figcaption>
-                    </figure>
-                    <figure class="step-image">
-                        <img src="photos/photo_37@26-11-2025_07-29-34.jpg" alt="groupby max" loading="lazy">
-                        <figcaption>القيمة الأعلى</figcaption>
-                    </figure>
-                </div>
-            </article>
+            <div class="quiz-options" id="quiz-options">
+                <!-- Options injected by JS -->
+            </div>
 
-            <article class="step-card conclusion-card">
-                <div class="step-content">
-                    <h3>🎉 هذه كل الدوال!</h3>
-                    <p>تهانينا! لقد أكملت تعلم جميع الدوال الأساسية للتعامل مع البيانات في Python Pandas</p>
-                </div>
-            </article>
-        </section>
+            <div id="feedback-area" class="info-box" style="display: none; margin-top: 20px; text-align: right;"></div>
 
-    </main>
+            <button id="next-q-btn" class="run-btn" style="margin: 20px auto 0; display: none; width: fit-content;">
+                السؤال التالي ⬅
+            </button>
+        </div>
+    </div>
+
+    <!-- 3. Result View -->
+    <div id="quiz-result" class="quiz-container" style="display: none; text-align: center; padding: 50px 0;">
+        <div class="quiz-card">
+            <div style="font-size: 4rem; margin-bottom: 20px;">🎉</div>
+            <h2>نتيجتك النهائية</h2>
+            <div id="final-score" style="font-size: 3.5rem; color: var(--primary); font-weight: 800; margin: 20px 0;">
+                %90</div>
+            <p id="final-msg" style="font-size: 1.2rem; margin-bottom: 30px;">ممتاز جداً!</p>
+
+            <button class="run-btn" style="margin: 0 auto; padding: 10px 30px; font-size: 1.1rem;"
+                onclick="resetQuiz()">
+                إعادة المحاولة 🔄
+            </button>
+        </div>
+    </div>
+    </div>
+
+
 
     <!-- Footer -->
     <footer class="site-footer">
-        <p>دورة الذكاء الاصطناعي - Kaggle & Python Pandas</p>
-        <p class="credits">BTEC توجيهي - 2025</p>
+        <a href="https://www.mediafire.com/file/vw6njuvxu6r7hfw/app-release.apk/file" target="_blank" class="app-promo">
+            <span class="app-icon">📱</span>
+            <div>
+                <div style="font-weight: bold; font-size: 1.1rem;">تطبيق ذكر</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">أفضل تطبيق للقرآن والأذكار - حمّل الآن!</div>
+            </div>
+        </a>
+        <div style="margin-top: 20px;">
+            <p>منصة التعليم الشاملة - Python & ML</p>
+            <p class="credits">تصميم وتطوير احترافي 2026</p>
+        </div>
     </footer>
 
     <!-- Theme Toggle Button -->
@@ -610,14 +1612,356 @@ df.groupby('species').max()</code></pre>
         <span class="icon">🌙</span>
     </button>
 
-    <!-- Lightbox Modal -->
+    <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">&times;</button>
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
         <img class="lightbox-image" id="lightboxImage" src="" alt="">
         <p class="lightbox-caption" id="lightboxCaption"></p>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Scripts -->
+    <script>
+        (function () {
+            'use strict';
+
+            /* --- Theme Manager --- */
+            const ThemeManager = {
+                init() {
+                    const toggle = document.getElementById('themeToggle');
+                    const saved = localStorage.getItem('theme') || 'light';
+                    this.setTheme(saved);
+                    toggle?.addEventListener('click', () => this.toggleTheme());
+                },
+                toggleTheme() {
+                    const current = document.documentElement.getAttribute('data-theme');
+                    const newTheme = current === 'dark' ? 'light' : 'dark';
+                    this.setTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                },
+                setTheme(theme) {
+                    const icon = document.querySelector('#themeToggle .icon');
+                    if (theme === 'dark') {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        if (icon) icon.textContent = '☀️';
+                    } else {
+                        document.documentElement.removeAttribute('data-theme');
+                        if (icon) icon.textContent = '🌙';
+                    }
+                }
+            };
+
+            /* --- Syntax Highlighter --- */
+            const SyntaxHighlighter = {
+                init() {
+                    document.querySelectorAll('.code-block code').forEach(block => {
+                        this.highlight(block);
+                    });
+                },
+                highlight(block) {
+                    let html = block.innerHTML;
+
+                    // Simple tokenization to protect strings and comments
+                    const strings = [];
+                    const comments = [];
+
+                    // Hide strings "..." or '...'
+                    html = html.replace(/(['"])(.*?)\1/g, (match) => {
+                        strings.push(match);
+                        return `___STR${strings.length - 1}___`;
+                    });
+
+                    // Hide comments # ...
+                    html = html.replace(/(#.*)/g, (match) => {
+                        comments.push(match);
+                        return `___COM${comments.length - 1}___`;
+                    });
+
+                    // Highlight Keywords
+                    const keywords = ['def', 'class', 'import', 'from', 'return', 'if', 'else', 'elif', 'for', 'while', 'print', 'True', 'False', 'in', 'and', 'or', 'not', 'as', 'None', 'break', 'continue', 'pass', 'lambda', 'with'];
+                    html = html.replace(new RegExp(`\\b(${keywords.join('|')})\\b`, 'g'), '<span class="token keyword">$1</span>');
+
+                    // Highlight Functions (word followed by opening paren)
+                    html = html.replace(/\b([a-zA-Z_]\w*)(?=\()/g, '<span class="token function">$1</span>');
+
+                    // Highlight Numbers
+                    html = html.replace(/\b(\d+\.?\d*)\b/g, '<span class="token number">$1</span>');
+
+                    // Restore Comments (and wrap them)
+                    html = html.replace(/___COM(\d+)___/g, (match, i) => {
+                        return `<span class="token comment">${comments[i]}</span>`;
+                    });
+
+                    // Restore Strings (and wrap them)
+                    html = html.replace(/___STR(\d+)___/g, (match, i) => {
+                        return `<span class="token string">${strings[i]}</span>`;
+                    });
+
+                    block.innerHTML = html;
+                }
+            };
+
+            /* --- Tab System --- */
+            const TabSystem = {
+                init() {
+                    const tabs = document.querySelectorAll('.tab-btn[data-tab]');
+                    tabs.forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            this.switchTab(tab.dataset.tab);
+                        });
+                    });
+                },
+                switchTab(tabId) {
+                    // Update Buttons
+                    document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.tab === tabId);
+                    });
+
+                    // Update Content
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    const target = document.getElementById(tabId);
+                    if (target) target.classList.add('active');
+                }
+            };
+
+            /* --- Quiz System --- */
+            const QuizSystem = {
+                currentQuestions: [],
+                currentIndex: 0,
+                score: 0,
+
+                // DATA BANK
+                db: {
+                    python: [
+                        { q: "ما هو ناتج: print(10 // 3)؟", options: ["3.33", "3", "3.0", "Error"], correct: 1, info: "// هي قسمة الأعداد الصحيحة (بدون باقي)." },
+                        { q: "أي مما يلي يُستخدم لتعريف دالة؟", options: ["func", "define", "def", "function"], correct: 2, info: "نستخدم def لتعريف الدوال في بايثون." },
+                        { q: "ما نوع البيانات لـ: [1, 2, 3]؟", options: ["Tuple", "List", "Set", "Dictionary"], correct: 1, info: "الأقواس المربعة [] تدل على List." },
+                        { q: "كيف نضيف عنصراً لقائمة؟", options: [".push()", ".add()", ".append()", ".insert()"], correct: 2, info: "append() تضيف العنصر لنهاية القائمة." },
+                        { q: "ما ناتج: print('A' * 3)؟", options: ["AAA", "A3", "Error", "A A A"], correct: 0, info: "يمكن تكرار النصوص بضربها في رقم." },
+                        { q: "أي مما يلي اسم متغير صحيح؟", options: ["1name", "my-name", "my_name", "class"], correct: 2, info: "المتغير لا يبدأ برقم ولا يحوي - ولا يكون كلمة محجوزة." },
+                        { q: "ما ناتج: bool(0)؟", options: ["True", "False", "Error", "None"], correct: 1, info: "الصفر يعتبر False دائماً." },
+                        { q: "كيف نوقف حلقة التكرار؟", options: ["stop", "exit", "break", "continue"], correct: 2, info: "break تكسر الحلقة وتوقفها." },
+                        { q: "ماذا تفعل range(5)؟", options: ["تولد أرقام من 1 لـ 5", "تولد أرقام من 0 لـ 5", "تولد أرقام من 0 لـ 4", "خطأ"], correct: 2, info: "range تبدأ من 0 وتنتهي قبل الرقم المحدد بواحد." },
+                        { q: "ما ناتج: 2 ** 3؟", options: ["6", "5", "8", "9"], correct: 2, info: "** تعني الأس (2 أس 3 = 8)." },
+                        { q: "أي مكتبة نستخدمها للعمليات الرياضية المعقدة؟", options: ["math", "sys", "os", "random"], correct: 0, info: "مكتبة math تحوي الجذر واللوغاريتم وغيرها." },
+                        { q: "كيف نحول نص '5' إلى رقم؟", options: ["to_int('5')", "int('5')", "num('5')", "str('5')"], correct: 1, info: "int() هي دالة التحويل لعدد صحيح." },
+                        { q: "ماذا يعني الرمز != ؟", options: ["يساوي", "لا يساوي", "أكبر من", "إسناد"], correct: 1, info: "!= تعني لا يساوي." },
+                        { q: "ما هو الـ Index للحرف 'o' في 'Hello'؟", options: ["3", "4", "5", "2"], correct: 1, info: "H=0, e=1, l=2, l=3, o=4." },
+                        { q: "كيف نستقبل مدخلات من المستخدم؟", options: ["get()", "scan()", "input()", "read()"], correct: 2, info: "input() توقف البرنامج وتنتظر كتابة المستخدم." },
+                        { q: "ما ناتج: len('Hi')؟", options: ["1", "2", "3", "0"], correct: 1, info: "len() تعيد عدد العناصر أو الحروف." },
+                        { q: "كيف نكتب تعليقاً (Comment)؟", options: ["// تعليق", "/* تعليق */", "# تعليق", "-- تعليق"], correct: 2, info: "الهاش # يستخدم للتعليقات." },
+                        { q: "ما نتيجة: type(5.5)؟", options: ["int", "float", "str", "double"], correct: 1, info: "الأعداد العشرية هي float." },
+                        { q: "أي أمر يطبع نصاً على الشاشة؟", options: ["echo", "console.log", "print", "printf"], correct: 2, info: "print هي دالة الطباعة في بايثون." },
+                        { q: "ماذا يحدث عند القسمة على صفر؟", options: ["0", "Infinity", "ZeroDivisionError", "NaN"], correct: 2, info: "يحدث خطأ ZeroDivisionError." },
+                    ],
+                    ml: [
+                        { q: "ما هي أول خطوة في مشروع ML؟", options: ["التدريب", "جمع البيانات", "التوقع", "التقييم"], correct: 1, info: "البيانات هي الوقود، يجب جمعها وتنظيفها أولاً." },
+                        { q: "أي مكتبة نستخدمها للتعامل مع الجداول؟", options: ["NumPy", "Pandas", "Matplotlib", "Sklearn"], correct: 1, info: "Pandas هي الأفضل للـ DataFrames." },
+                        { q: "ما وظيفة df.head()؟", options: ["رسم البيانات", "حذف البيانات", "عرض أول 5 صفوف", "تدريب النموذج"], correct: 2, info: "تستخدم لاستكشاف شكل البيانات." },
+                        { q: "ماذا تعني Supervised Learning؟", options: ["تعلم بدون معلم", "بيانات مع إجابات (Labels)", "تعلم ذاتي", "لا شيء مما سبق"], correct: 1, info: "يعني أننا نعلم النموذج الأجوبة الصحيحة مسبقاً." },
+                        { q: "أي خوارزمية تستخدم للتصنيف (Classification)؟", options: ["Linear Regression", "Logistic Regression", "K-Means", "PCA"], correct: 1, info: "رقم اسمها، Logistic Regression تستخدم للتصنيف." },
+                        { q: "ما وظيفة machine.fit(X, y)؟", options: ["اختبار النموذج", "تدريب النموذج", "رسم النموذج", "حفظ النموذج"], correct: 1, info: "fit هي الأمر الذي يبدأ عملية التعلم." },
+                        { q: "كيف نتأكد من عدم وجود بيانات مفقودة؟", options: ["df.isnull().sum()", "df.info()", "df.describe()", "الكل صحيح"], correct: 3, info: "كل هذه الدوال تساعد في كشف الفراغات." },
+                        { q: "ما هو الـ Target؟", options: ["المتغير المستقل", "العمود الذي نريد توقعه", "البيانات المدخلة", "الضوضاء"], correct: 1, info: "الـ Target (أو y) هو الهدف." },
+                        { q: "في K-Means، ماذا يمثل K؟", options: ["عدد البيانات", "عدد المجموعات (Clusters)", "عدد المحاولات", "معدل الخطأ"], correct: 1, info: "K هو عدد العناقيد التي نريد تقسيم البيانات لها." },
+                        { q: "لماذا نستخدم train_test_split؟", options: ["لزيادة البيانات", "لتقييم النموذج على بيانات جديدة", "لتسريع التدريب", "للتلوين"], correct: 1, info: "لنختبر النموذج على بيانات لم يرها من قبل." },
+                        { q: "ما هي الـ Features؟", options: ["المخرجات", "المدخلات (الأعمدة)", "الأخطاء", "الدوال"], correct: 1, info: "الـ Features (X) هي المعلومات التي نستخدمها للتوقع." },
+                        { q: "أي مقياس يستخدم لتقييم التصنيف؟", options: ["Accuracy", "Mean Absolute Error", "R2 Score", "Distance"], correct: 0, info: "الدقة (Accuracy) هي أشهر مقياس للتصنيف." },
+                        { q: "ماذا تفعل df.dropna()؟", options: ["تحذف الصفوف الفارغة", "تملأ الفراغات", "تحذف العمود", "تكرر البيانات"], correct: 0, info: "drop تعني حذف، na تعني مفقود." },
+                        { q: "ما هو الـ Regression؟", options: ["توقع فئة (نعم/لا)", "توقع قيمة رقمية مستمرة", "تجميع الصور", "تحليل نصوص"], correct: 1, info: "الانحدار يستخدم للأرقام (مثل السعر، العمر)." },
+                        { q: "لماذا نحول النصوص لأرقام قبل التدريب؟", options: ["لتقليل المساحة", "لأن الكمبيوتر يفهم الأرقام فقط", "للتشفير", "لا يلزم ذلك"], correct: 1, info: "النماذج الرياضية لا تعمل مع النصوص مباشرة." },
+                        { q: "ما هو Overfitting؟", options: ["أداء ممتاز تدريب واختبار", "حفظ البيانات بدل فهمها (أداء سيء في الاختبار)", "أداء سيء في الاثنين", "سرعة عالية"], correct: 1, info: "يعني أن النموذج 'بصم' الأسئلة ولم يفهم الدرس." },
+                        { q: "ما وظيفة Matplotlib؟", options: ["التعلم الآلي", "الرسم البياني وتصور البيانات", "التعامل مع الويب", "قواعد البيانات"], correct: 1, info: "مكتبة للـ Plotting." },
+                        { q: "ماذا تعني df.shape = (150, 5)؟", options: ["150 عمود و 5 صفوف", "150 صف و 5 أعمدة", "حجم الملف 150kb", "غير معروف"], correct: 1, info: "الأول للصفوف والثاني للأعمدة." },
+                        { q: "كيف نحذف التكرار؟", options: ["df.clean()", "df.unique()", "df.drop_duplicates()", "df.remove()"], correct: 2, info: "drop_duplicates هي الدالة الصحيحة." },
+                        { q: "ما هي مكتبة Scikit-Learn؟", options: ["مكتبة ألعاب", "مكتبة واجهات", "أشهر مكتبة خوارزميات ML", "مكتبة صوتيات"], correct: 2, info: "هي السلاح الأساسي لمهندس الـ ML." },
+                    ]
+                },
+
+                // Shuffle array (Fischer-Yates)
+                shuffle(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                },
+
+                start(type) {
+                    let qList = [];
+                    if (type === 'mix') {
+                        // Get 10 random from Python and 10 random from ML
+                        const py = this.shuffle([...this.db.python]).slice(0, 10);
+                        const ml = this.shuffle([...this.db.ml]).slice(0, 10);
+                        qList = [...py, ...ml];
+                    } else {
+                        // Get 20 random from selected
+                        qList = this.shuffle([...this.db[type]]).slice(0, 20);
+                    }
+
+                    // Shuffle final list
+                    this.currentQuestions = this.shuffle(qList);
+                    this.currentIndex = 0;
+                    this.score = 0;
+
+                    document.getElementById('quiz-intro').style.display = 'none';
+                    document.getElementById('quiz-active').style.display = 'block';
+                    document.getElementById('quiz-result').style.display = 'none';
+                    this.renderQuestion();
+                },
+
+                renderQuestion() {
+                    const q = this.currentQuestions[this.currentIndex];
+                    document.getElementById('quiz-progress').textContent = `سؤال ${this.currentIndex + 1} / ${this.currentQuestions.length}`;
+                    document.getElementById('question-text').textContent = q.q;
+                    document.getElementById('feedback-area').style.display = 'none';
+                    document.getElementById('next-q-btn').style.display = 'none';
+
+                    const optionsContainer = document.getElementById('quiz-options');
+                    optionsContainer.innerHTML = '';
+
+                    q.options.forEach((opt, index) => {
+                        const btn = document.createElement('button');
+                        btn.className = 'option-btn';
+                        btn.textContent = opt;
+                        btn.onclick = () => this.checkAnswer(index, btn);
+                        optionsContainer.appendChild(btn);
+                    });
+                },
+
+                checkAnswer(selectedIndex, btnElement) {
+                    if (document.getElementById('next-q-btn').style.display === 'flex') return;
+
+                    const q = this.currentQuestions[this.currentIndex];
+                    const buttons = document.querySelectorAll('.option-btn');
+                    const feedback = document.getElementById('feedback-area');
+
+                    if (selectedIndex === q.correct) {
+                        btnElement.classList.add('correct');
+                        this.score++;
+                        feedback.innerHTML = `<strong>عظيم! إجابة صحيحة ✅</strong><br>${q.info}`;
+                    } else {
+                        btnElement.classList.add('incorrect');
+                        buttons[q.correct].classList.add('correct');
+                        feedback.innerHTML = `<strong>للأسف خطأ ❌</strong><br>الإجابة الصحيحة هي: ${q.options[q.correct]}<br><em>${q.info}</em>`;
+                    }
+
+                    document.getElementById('quiz-score').textContent = `النتيجة: ${this.score}`;
+                    feedback.style.display = 'block';
+
+                    const nextBtn = document.getElementById('next-q-btn');
+                    nextBtn.style.display = 'flex';
+                    nextBtn.onclick = () => this.nextQuestion();
+                },
+
+                nextQuestion() {
+                    this.currentIndex++;
+                    if (this.currentIndex < this.currentQuestions.length) {
+                        this.renderQuestion();
+                    } else {
+                        this.showResult();
+                    }
+                },
+
+                showResult() {
+                    document.getElementById('quiz-active').style.display = 'none';
+                    const resultCard = document.getElementById('quiz-result');
+                    resultCard.style.display = 'block';
+
+                    const percent = Math.round((this.score / this.currentQuestions.length) * 100);
+                    document.getElementById('final-score').textContent = `${percent}%`;
+
+                    let msg = "";
+                    if (percent === 100) msg = "مذهل! أنت عبقري 🏆";
+                    else if (percent >= 85) msg = "ممتاز جداً! 🌟";
+                    else if (percent >= 70) msg = "جيد جداً، استمر! 👍";
+                    else if (percent >= 50) msg = "جيد، ولكن تحتاج للمراجعة 📚";
+                    else msg = "لا بأس، حاول مرة أخرى! 💪";
+
+                    document.getElementById('final-msg').textContent = msg;
+
+                    // Save best
+                    const best = localStorage.getItem('bestScore') || 0;
+                    if (percent > best) localStorage.setItem('bestScore', percent);
+                },
+
+                reset() {
+                    document.getElementById('quiz-intro').style.display = 'block';
+                    document.getElementById('quiz-active').style.display = 'none';
+                    document.getElementById('quiz-result').style.display = 'none';
+                }
+            };
+
+            window.startQuiz = function (type) {
+                QuizSystem.start(type);
+            };
+            window.resetQuiz = function () {
+                QuizSystem.reset();
+            };
+
+            /* --- Utilities (Lightbox, Copy, etc) --- */
+            const Utils = {
+                init() {
+                    // Lightbox
+                    const lightbox = document.getElementById('lightbox');
+                    document.querySelectorAll('.step-image img').forEach(img => {
+                        img.addEventListener('click', () => {
+                            document.getElementById('lightboxImage').src = img.src;
+                            document.getElementById('lightboxCaption').textContent = img.alt;
+                            lightbox.classList.add('active');
+                        });
+                    });
+                    document.getElementById('lightboxClose')?.addEventListener('click', () => {
+                        lightbox.classList.remove('active');
+                    });
+
+                    // Copy Code
+                    document.querySelectorAll('.code-block').forEach(block => {
+                        block.addEventListener('click', async () => {
+                            try {
+                                await navigator.clipboard.writeText(block.innerText);
+                                // Optional visual feedback
+                            } catch (e) { }
+                        });
+                    });
+                }
+            };
+
+            /* --- Animations --- */
+            const Animations = {
+                init() {
+                    const cards = document.querySelectorAll('.step-card');
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'translateY(0)';
+                            }
+                        });
+                    }, { threshold: 0.1 });
+
+                    cards.forEach(card => {
+                        // Set initial state for valid animation
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        card.style.transition = 'all 0.5s ease-out';
+                        observer.observe(card);
+                    });
+                }
+            };
+
+            // Init All
+            document.addEventListener('DOMContentLoaded', () => {
+                ThemeManager.init();
+                TabSystem.init();
+                Utils.init();
+                Animations.init();
+            });
+
+        })();
+    </script>
 </body>
 
 </html>
